@@ -1,8 +1,6 @@
 # FreeBSD Desktop
 ## Desktop Environments installer
 
-[![Embedded Networks](https://cldup.com/dTxpPi9lDf.thumb.png)](https://embeddednetworks.com.br)
-
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 A simple script that uses dialogs to facilitate the installation of desktop environments for those with no initial knowledge of FreeBSD.
