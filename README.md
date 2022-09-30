@@ -25,6 +25,8 @@ FreeBSD Desktop requires only internet to run.
 For production environments...
 
 ```sh
+pkg update -y
+pkg install git -y
 chmod +x freebsd_desktop.sh
 ./freebsd_desktop.sh
 ```
