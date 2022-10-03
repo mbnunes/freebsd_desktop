@@ -81,7 +81,7 @@ cria_xinit()
 
 apps_list()
 {
-    $apps=$(dialog --backtitle "Desktop Enviroment Installer - Applications" --stdout --checklist 'Quais aplicativos deseja instalar?' 0    0   0 \
+    $apps=$(dialog --stdout --checklist 'Quais aplicativos deseja instalar?' 0    0   0 \
     firefox ''  OFF \
     wifimgr ''  OFF \
     thunderbird ''  OFF \
