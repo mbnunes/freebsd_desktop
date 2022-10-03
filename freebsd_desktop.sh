@@ -10,6 +10,11 @@ using_latest_repo(){
   fingerprints: "/usr/share/keys/pkg",
   enabled: yes
 }' > /usr/local/etc/pkg/repos/FreeBSD.conf &&
+  echo 'Katana: { 
+    url: "pkg+https://raw.githubusercontent.com/fluxer/katana-freebsd/master", 
+    mirror_type: "srv", 
+    enabled: yes 
+  }' >> /usr/local/etc/pkg/repos/Katana.conf &&
   pkg update -f
 }
 
@@ -48,7 +53,7 @@ gnome4()
 
 kde_plasma()
 {
-    echo "Starting KDE Plasma Installer"
+    echo "Starting Kde Plasma Installer"
     pkg_basic
     pkg -y install x11/kde5 x11/sddm 
     edit_rc
@@ -58,10 +63,34 @@ kde_plasma()
 
 xfce()
 {
-    echo "Starting XFCE Installer"
+    echo "Starting Xfce Installer"
     pkg_basic
     pkg install -y xfce lightdm lightdm-gtk-greeter 
     sysrc 'lightdm_enable="YES"'
+}
+
+mate()
+{
+    echo "Starting Mate Installer"
+    pkg_basic
+    pkg install -y mate-desktop mate slim slim-themes
+    sysrc 'slim_enable="YES"'
+}
+
+window_maker()
+{
+  echo "Starting Window Maker Installer"
+  pkg_basic
+  pkg install -y gnustep windowmaker lightdm slim slim-themes
+  sysrc 'slim_enable="YES"'
+}
+
+katana()
+{
+  echo "Starting Katana Installer"
+  pkg_basic
+  pkg install -y katana-workspace lightdm lightdm-gtk-greeter
+  sysrc 'lightdm_enable="YES"'
 }
 
 cria_xinit()
@@ -79,23 +108,46 @@ using_latest_repo
 
 CHOICE=0
 
-while [ $CHOICE -ne 4 ]; do
+while [ $CHOICE -ne 7 ]; do
 
-    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "XFCE" 4 "Sair" 2>&1 > /dev/tty )
+    CHOICE=$(dialog 
+      --backtitle "Desktop Enviroment Installer" \  
+      --title "Select Enviroments" \ 
+      --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 \
+        1 "Gnome" \ 
+        2 "Kde Plasma" \ 
+        3 "Xfce" \
+        4 "Mate" \
+        5 "Katana" \
+        6 "Window Maker" \
+        7 "Sair" \
+        2>&1 > /dev/tty )
 
     clear
     case $CHOICE in
         1)
             gnome4
-            break
             ;;
+            break
         2)
             kde_plasma
-            break
             ;;
+            break
         3)
             xfce
-            break
             ;;
+            break
+        4)
+            mate
+            ;;
+            break
+        5)
+            katana
+            ;;
+            break
+        6) 
+            window_maker
+            ;;
+            break
     esac
 done
