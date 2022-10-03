@@ -2,13 +2,13 @@
 
 using_latest_repo(){
   mkdir -p /usr/local/etc/pkg/repos &&
-  echo "FreeBSD: {
+  echo 'FreeBSD: {
   url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest",
   mirror_type: "srv",
   signature_type: "fingerprints",
   fingerprints: "/usr/share/keys/pkg",
   enabled: yes
-}" > /usr/local/etc/pkg/repos/FreeBSD.conf &&
+}' > /usr/local/etc/pkg/repos/FreeBSD.conf &&
   pkg update -f
 }
 
