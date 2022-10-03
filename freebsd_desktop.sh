@@ -15,7 +15,6 @@ using_latest_repo(){
 
 pkg_basic()
 {
-    pkg update
     pkg upgrade -y
     pkg install -y xorg
 }
@@ -32,14 +31,16 @@ edit_rc()
 
 edit_fstab()
 {
-    echo 'proc  /proc   procfs  rw  0   0'
+    echo 'proc  /proc   procfs  rw  0   0' >> /etc/fstab
 }
 
 gnome4()
 {
     echo "Starting Gnome4 Installer"
     pkg_basic
-    pkg install -y gnome-42_2 gnome-desktop-42.2 gdm-42.0_2
+    pkg install -y gnome-42_2
+    pkg install -y gnome-desktop-42.2
+    pkg install -y gdm-42.0_2
     edit_rc
     edit_fstab
     sysrc 'gnome_enable="YES"'
@@ -50,7 +51,8 @@ kde_plasma()
 {
     echo "Starting KDE Plasma Installer"
     pkg_basic
-    pkg -y install x11/kde5 x11/sddm 
+    pkg -y install x11/kde5  
+    pkg -y install x11/sddm
     edit_rc
     edit_fstab
     sysrc 'sddm_enable="YES"'
@@ -60,7 +62,9 @@ xfce()
 {
     echo "Starting XFCE Installer"
     pkg_basic
-    pkg install -y xfce lightdm lightdm-gtk-greeter 
+    pkg install -y xfce 
+    pkg install -y lightdm 
+    pkg install -y lightdm-gtk-greeter 
     sysrc 'lightdm_enable="YES"'
 }
 
@@ -75,11 +79,24 @@ cria_xinit()
     done
 }
 
+apps_list()
+{
+    $apps=$(dialog --backtitle "Desktop Enviroment Installer - Applications" --stdout --checklist 'Quais aplicativos deseja instalar?' 0    0   0 \
+    firefox ''  OFF \
+    wifimgr ''  OFF \
+    thunderbird ''  OFF \
+    wine    ''  OFF \
+    wine-gecko  ''  OFF \
+    wine-mono   ''  OFF \
+    libreoffice ''  OFF )
+    pkg install -y $apps
+}
+
 using_latest_repo
 
 CHOICE=0
 
-while [ $CHOICE -ne 4 ]; do
+while [ $CHOICE -ne 5 ]; do
 
     CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "XFCE" 4 "Sair" 2>&1 > /dev/tty )
 
@@ -95,6 +112,10 @@ while [ $CHOICE -ne 4 ]; do
             ;;
         3)
             xfce
+            break
+            ;;
+        4)
+            apps_list
             break
             ;;
     esac
