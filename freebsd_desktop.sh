@@ -1,19 +1,33 @@
 #!/bin/sh
 
+using_latest_repo(){
+  # Essa função troca os repositorios trimestrais do pkg pelos mais recentes
+  mkdir -p /usr/local/etc/pkg/repos &&
+  echo 'FreeBSD: {
+  url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest",
+  mirror_type: "srv",
+  signature_type: "fingerprints",
+  fingerprints: "/usr/share/keys/pkg",
+  enabled: yes
+}' > /usr/local/etc/pkg/repos/FreeBSD.conf &&
+  pkg update -f
+}
+
 pkg_basic()
 {
-    pkg update -y
+    pkg update
     pkg upgrade -y
-    pkg install xorg
+    pkg install -y xorg
 }
 
 edit_rc()
 {
-    echo 'moused_enable="YES"' >> /etc/rc.conf
-    echo 'dbus_enable="YES"' >> /etc/rc.conf
-    echo 'hald_enable="YES"' >> /etc/rc.conf
-    echo 'sound_load="YES"' >> /etc/rc.conf
-    echo 'snd_hda_load="YES"' >> /etc/rc.conf
+    # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
+    sysrc 'moused_enable="YES"'
+    sysrc 'dbus_enable="YES"'
+    sysrc 'hald_enable="YES"'
+    sysrc 'sound_load="YES"'
+    sysrc 'snd_hda_load="YES"'
 }
 
 edit_fstab()
@@ -25,30 +39,29 @@ gnome4()
 {
     echo "Starting Gnome4 Installer"
     pkg_basic
-    pkg install gnome-42_2 gnome-desktop-42.2 gdm-42.0_2 -y
+    pkg install -y gnome-42_2 gnome-desktop-42.2 gdm-42.0_2
     edit_rc
     edit_fstab
-    echo 'gnome_enable="YES"' >> /etc/rc.conf
-    echo 'gdm_enable="YES"' >> /etc/rc.conf
+    sysrc 'gnome_enable="YES"'
+    sysrc 'gdm_enable="YES"'
 }
 
 kde_plasma()
 {
     echo "Starting KDE Plasma Installer"
     pkg_basic
-    pkg install x11/kde5 x11/sddm -y
+    pkg -y install x11/kde5 x11/sddm 
     edit_rc
     edit_fstab
-    echo 'sddm_enable="YES"' >> /etc/rc.conf
-
+    sysrc 'sddm_enable="YES"'
 }
 
 xfce()
 {
     echo "Starting XFCE Installer"
     pkg_basic
-    pkg install xfce slim slim-themes -y
-    echo 'slim_enable="YES"' >> /etc/rc.conf
+    pkg install -y xfce lightdm lightdm-gtk-greeter 
+    sysrc 'lightdm_enable="YES"'
 }
 
 cria_xinit()
@@ -62,6 +75,8 @@ cria_xinit()
     done
 }
 
+using_latest_repo
+
 CHOICE=0
 
 while [ $CHOICE -ne 4 ]; do
@@ -72,12 +87,15 @@ while [ $CHOICE -ne 4 ]; do
     case $CHOICE in
         1)
             gnome4
+            break
             ;;
         2)
             kde_plasma
+            break
             ;;
         3)
             xfce
+            break
             ;;
     esac
 done
