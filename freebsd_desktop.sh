@@ -11,7 +11,6 @@ using_latest_repo(){
   enabled: yes
 }' > /usr/local/etc/pkg/repos/FreeBSD.conf &&
   pkg update -f
-  return
 }
 
 pkg_basic()
@@ -19,7 +18,6 @@ pkg_basic()
     pkg update
     pkg upgrade -y
     pkg install -y xorg
-    return
 }
 
 edit_rc()
@@ -30,13 +28,11 @@ edit_rc()
     sysrc 'hald_enable="YES"'
     sysrc 'sound_load="YES"'
     sysrc 'snd_hda_load="YES"'
-    return
 }
 
 edit_fstab()
 {
     echo 'proc  /proc   procfs  rw  0   0'
-    return
 }
 
 gnome4()
@@ -48,7 +44,6 @@ gnome4()
     edit_fstab
     sysrc 'gnome_enable="YES"'
     sysrc 'gdm_enable="YES"'
-    return
 }
 
 kde_plasma()
@@ -59,16 +54,14 @@ kde_plasma()
     edit_rc
     edit_fstab
     sysrc 'sddm_enable="YES"'
-    return
 }
 
 xfce()
 {
     echo "Starting XFCE Installer"
     pkg_basic
-    pkg install -y xfce slim slim-themes 
+    pkg install -y xfce lightdm lightdm-gtk-greeter 
     sysrc 'lightdm_enable="YES"'
-    return
 }
 
 cria_xinit()
@@ -80,7 +73,6 @@ cria_xinit()
         TEMP_USER=$(sed "s/\/home\///g" $usuario)
         echo $TEMP_USER
     done
-    return
 }
 
 using_latest_repo
