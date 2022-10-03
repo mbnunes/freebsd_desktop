@@ -81,8 +81,8 @@ window_maker()
 {
   echo "Starting Window Maker Installer"
   pkg_basic
-  pkg install -y gnustep windowmaker lightdm slim slim-themes
-  sysrc 'slim_enable="YES"'
+  pkg install -y gnustep windowmaker lightdm lightdm-gtk-greeter
+  sysrc 'lightdm_enable="YES"'
 }
 
 katana()
