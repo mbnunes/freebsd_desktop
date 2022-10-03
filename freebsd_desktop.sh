@@ -110,17 +110,17 @@ CHOICE=0
 
 while [ $CHOICE -ne 7 ]; do
 
-    CHOICE=$(dialog 
-      --backtitle "Desktop Enviroment Installer"   
-      --title "Select Enviroments"  
-      --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 
-        1 "Gnome"  
-        2 "Kde Plasma"  
-        3 "Xfce" 
-        4 "Mate" 
-        5 "Katana" 
-        6 "Window Maker" 
-        7 "Sair" 
+    CHOICE=$(dialog / 
+      --backtitle "Desktop Enviroment Installer" /   
+      --title "Select Enviroments" /  
+      --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 /
+        1 "Gnome" /
+        2 "Kde Plasma" /  
+        3 "Xfce" /
+        4 "Mate" /
+        5 "Katana" /
+        6 "Window Maker" / 
+        7 "Sair" /
         2>&1 > /dev/tty )
 
     clear
