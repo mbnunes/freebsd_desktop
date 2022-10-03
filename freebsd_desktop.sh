@@ -16,7 +16,7 @@ pkg_basic()
 {
     pkg update
     pkg upgrade -y
-    pkg install xorg
+    pkg install -y xorg
 }
 
 edit_rc()
@@ -37,7 +37,7 @@ gnome4()
 {
     echo "Starting Gnome4 Installer"
     pkg_basic
-    pkg install gnome-42_2 gnome-desktop-42.2 gdm-42.0_2 -y
+    pkg install -y gnome-42_2 gnome-desktop-42.2 gdm-42.0_2
     edit_rc
     edit_fstab
     echo 'gnome_enable="YES"' >> /etc/rc.conf
@@ -48,7 +48,7 @@ kde_plasma()
 {
     echo "Starting KDE Plasma Installer"
     pkg_basic
-    pkg install x11/kde5 x11/sddm -y
+    pkg -y install x11/kde5 x11/sddm 
     edit_rc
     edit_fstab
     echo 'sddm_enable="YES"' >> /etc/rc.conf
@@ -59,7 +59,7 @@ xfce()
 {
     echo "Starting XFCE Installer"
     pkg_basic
-    pkg install xfce slim slim-themes -y
+    pkg install -y xfce slim slim-themes 
     echo 'slim_enable="YES"' >> /etc/rc.conf
 }
 
