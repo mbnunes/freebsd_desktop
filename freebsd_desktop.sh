@@ -87,12 +87,15 @@ while [ $CHOICE -ne 4 ]; do
     case $CHOICE in
         1)
             gnome4
+            break
             ;;
         2)
             kde_plasma
+            break
             ;;
         3)
             xfce
+            break
             ;;
     esac
 done
