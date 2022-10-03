@@ -128,26 +128,20 @@ while [ $CHOICE -ne 7 ]; do
         1)
             gnome4
             ;;
-            break
         2)
             kde_plasma
             ;;
-            break
         3)
             xfce
             ;;
-            break
         4)
             mate
             ;;
-            break
         5)
             katana
             ;;
-            break
         6) 
             window_maker
             ;;
-            break
     esac
 done
