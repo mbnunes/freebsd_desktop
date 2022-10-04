@@ -1,7 +1,11 @@
 #!/bin/sh
+# Developed by: Maurício Nunes               
+# https://github.com/mbnunes/freebsd_desktop 
+# Lisence: BSD v3
 
-using_latest_repo(){
-  # Essa função troca os repositorios trimestrais do pkg pelos mais recentes
+
+
+using_latest_repo(){  
   mkdir -p /usr/local/etc/pkg/repos &&
   echo 'FreeBSD: {
   url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest",
@@ -21,7 +25,6 @@ pkg_basic()
 
 edit_rc()
 {
-    # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
     sysrc 'moused_enable="YES"'
     sysrc 'dbus_enable="YES"'
     sysrc 'hald_enable="YES"'
