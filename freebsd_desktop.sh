@@ -1,9 +1,8 @@
 #!/bin/sh
-# Developed by: Maurício Nunes               
+# Developed by: Maurício Nunes 
+# Colaborators: KitsuneSemCalda               
 # https://github.com/mbnunes/freebsd_desktop 
 # Lisence: BSD v3
-
-
 
 using_latest_repo(){  
   mkdir -p /usr/local/etc/pkg/repos &&
@@ -30,12 +29,9 @@ pkg_basic()
 
 edit_rc()
 {
-<<<<<<< HEAD
     # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
     sysrc 'linux_enable="YES"'
     sysrc 'linux_mounts_enable="NO"'
-=======
->>>>>>> refs/remotes/origin/main
     sysrc 'moused_enable="YES"'
     sysrc 'dbus_enable="YES"'
     sysrc 'hald_enable="YES"'
@@ -45,16 +41,12 @@ edit_rc()
 
 edit_fstab()
 {
-<<<<<<< HEAD
-    echo 'proc  /proc   procfs  rw  0   0'
-    echo 'devfs /compat/linux/dev devfs rw,late 0 0'
-    echo 'tmpfs /compat/linux/dev/shm tmpfs rw,late,size=1g,mode=1777 0 0'
-    echo 'fdescfs /compat/linux/dev/fd fdescfs rw,late,linkrdlnk 0 0'
-    echo 'linprocfs /compat/linux/proc linprocfs rw,late 0 0'
-    echo 'linsysfs /compat/linux/sys linsysfs rw,late 0 0'
-=======
     echo 'proc  /proc   procfs  rw  0   0' >> /etc/fstab
->>>>>>> refs/remotes/origin/main
+    echo 'devfs /compat/linux/dev devfs rw,late 0 0' >> /etc/fstab
+    echo 'tmpfs /compat/linux/dev/shm tmpfs rw,late,size=1g,mode=1777 0 0' >> /etc/fstab
+    echo 'fdescfs /compat/linux/dev/fd fdescfs rw,late,linkrdlnk 0 0' >> /etc/fstab
+    echo 'linprocfs /compat/linux/proc linprocfs rw,late 0 0' >> /etc/fstab 
+    echo 'linsysfs /compat/linux/sys linsysfs rw,late 0 0' >> /etc/fstab
 }
 
 gnome4()
@@ -88,7 +80,6 @@ xfce()
     sysrc 'lightdm_enable="YES"'
 }
 
-<<<<<<< HEAD
 mate()
 {
     echo "Starting Mate Installer"
@@ -106,9 +97,7 @@ window_maker()
 }
 
 cria_xinit()
-=======
 apps_menu()
->>>>>>> refs/remotes/origin/main
 {
     OPTION=0
 
@@ -157,7 +146,10 @@ apps_list()
 drivers_list()
 {
     apps=$(dialog --stdout --checklist 'Which drivers do you want to install?' 0 0 0 \
-    amdgpu '' OFF)
+    intelgpu '' OFF \
+    amdgpu '' OFF \
+    vmware '' OFF 
+    )
 
     if [ -z $apps ]
     then
@@ -173,9 +165,9 @@ menu()
     using_latest_repo
     CHOICE=0
 
-    while [ $CHOICE -ne 5 ]; do
+    while [ $CHOICE -ne 7 ]; do
 
-        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "XFCE" 4 "Apps" 5 "Quit" 2>&1 > /dev/tty )
+        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "Xfce" 4 "Mate" 5 "Window Maker" 6 "Apps" 7 "Quit" 2>&1 > /dev/tty )
         
         clear
         case $CHOICE in
@@ -191,42 +183,22 @@ menu()
                 xfce
                 break
                 ;;
-            4)
+
+            4)  
+                mate
+                break
+                ;;
+
+            5)  
+                window_maker
+                break
+                ;;
+            6)
                 apps_menu
                 break
-                ;;        
+                ;;
         esac
     done
 }
 
-<<<<<<< HEAD
-using_latest_repo
-
-CHOICE=0
-
-while [ $CHOICE -ne 6 ]; do
-
-    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments"  --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 5 "Window Maker" 6 "Sair" 2>&1 > /dev/tty )
-
-    clear
-    case $CHOICE in
-        1)
-            gnome4
-            ;;
-        2)
-            kde_plasma
-            ;;
-        3)
-            xfce
-            ;;
-        4)
-            mate
-            ;;
-        5)
-            window_maker
-            ;;
-    esac
-done
-=======
 menu
->>>>>>> refs/remotes/origin/main
