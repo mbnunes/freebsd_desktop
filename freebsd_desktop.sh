@@ -28,6 +28,8 @@ pkg_basic()
 edit_rc()
 {
     # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
+    sysrc 'linux_enable="YES"'
+    sysrc 'linux_mounts_enable="NO"'
     sysrc 'moused_enable="YES"'
     sysrc 'dbus_enable="YES"'
     sysrc 'hald_enable="YES"'
@@ -38,6 +40,11 @@ edit_rc()
 edit_fstab()
 {
     echo 'proc  /proc   procfs  rw  0   0'
+    echo 'devfs /compat/linux/dev devfs rw,late 0 0'
+    echo 'tmpfs /compat/linux/dev/shm tmpfs rw,late,size=1g,mode=1777 0 0'
+    echo 'fdescfs /compat/linux/dev/fd fdescfs rw,late,linkrdlnk 0 0'
+    echo 'linprocfs /compat/linux/proc linprocfs rw,late 0 0'
+    echo 'linsysfs /compat/linux/sys linsysfs rw,late 0 0'
 }
 
 gnome4()
@@ -73,8 +80,16 @@ mate()
 {
     echo "Starting Mate Installer"
     pkg_basic
-    pkg install -y mate-desktop mate slim slim-themes
-    sysrc 'slim_enable="YES"'
+    pkg install -y mate-desktop mate lightdm-gtk-greeter
+    sysrc 'lightdm_enable="YES"'
+}
+
+window_maker()
+{
+    echo "Starting WindowMaker Installer"
+    pkg_basic
+    pkg install -y windowmaker lightdm lightdm-gtk-greeter
+    sysrc 'lightdm_enable="YES"'
 }
 
 cria_xinit()
@@ -92,9 +107,9 @@ using_latest_repo
 
 CHOICE=0
 
-while [ $CHOICE -ne 5 ]; do
+while [ $CHOICE -ne 6 ]; do
 
-    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments"  --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 5 "Sair" 2>&1 > /dev/tty )
+    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments"  --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 5 "Window Maker" 6 "Sair" 2>&1 > /dev/tty )
 
     clear
     case $CHOICE in
@@ -109,6 +124,9 @@ while [ $CHOICE -ne 5 ]; do
             ;;
         4)
             mate
+            ;;
+        5)
+            window_maker
             ;;
     esac
 done
