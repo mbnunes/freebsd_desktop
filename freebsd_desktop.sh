@@ -19,11 +19,11 @@ using_latest_repo(){
     enabled: yes 
   }' >> /usr/local/etc/pkg/repos/Katana.conf &&
   pkg update -f
+  pkg upgrade -y
 }
 
 pkg_basic()
 {
-    pkg upgrade -y
     pkg install -y xorg
 }
 
@@ -92,7 +92,7 @@ window_maker()
 {
     echo "Starting WindowMaker Installer"
     pkg_basic
-    pkg install -y windowmaker lightdm lightdm-gtk-greeter
+    pkg install -y windowmaker gnustep lightdm lightdm-gtk-greeter
     sysrc 'lightdm_enable="YES"'
 }
 
