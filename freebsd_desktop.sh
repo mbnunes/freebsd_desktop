@@ -77,22 +77,6 @@ mate()
     sysrc 'slim_enable="YES"'
 }
 
-window_maker()
-{
-  echo "Starting Window Maker Installer"
-  pkg_basic
-  pkg install -y gnustep windowmaker lightdm lightdm-gtk-greeter
-  sysrc 'lightdm_enable="YES"'
-}
-
-katana()
-{
-  echo "Starting Katana Installer"
-  pkg_basic
-  pkg install -y katana-workspace lightdm lightdm-gtk-greeter
-  sysrc 'lightdm_enable="YES"'
-}
-
 cria_xinit()
 {
     declare -a USER_DIR
@@ -108,9 +92,9 @@ using_latest_repo
 
 CHOICE=0
 
-while [ $CHOICE -ne 7 ]; do
+while [ $CHOICE -ne 5 ]; do
 
-    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments"  --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 5 "Katana" 6 "Window Maker" 7 "Sair" 2>&1 > /dev/tty )
+    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments"  --menu "Este é um script com intuito de facilitar a vida do usuario iniciente que queira testar o FreeBSD como Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 5 "Sair" 2>&1 > /dev/tty )
 
     clear
     case $CHOICE in
@@ -125,12 +109,6 @@ while [ $CHOICE -ne 7 ]; do
             ;;
         4)
             mate
-            ;;
-        5)
-            katana
-            ;;
-        6) 
-            window_maker
             ;;
     esac
 done
