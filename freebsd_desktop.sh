@@ -68,6 +68,33 @@ xfce()
     sysrc 'lightdm_enable="YES"'
 }
 
+apps_menu()
+{
+    OPTION=0
+
+    while [ $OPTION -ne 5 ]; do
+
+        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Back" 2>&1 > /dev/tty )
+
+        clear
+        case $OPTION in
+            1)
+                apps_list
+                break
+                ;;
+            2)
+                drivers_list
+                break
+                ;;
+            *)
+                menu
+                break
+                ;;
+        esac
+    done
+    
+}
+
 apps_list()
 {
     apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
@@ -77,36 +104,59 @@ apps_list()
     wine    ''  OFF \
     wine-gecko  ''  OFF \
     wine-mono   ''  OFF \
-    libreoffice ''  OFF \
-    amdgpu '' OFF)
-    pkg install -y $apps
+    libreoffice ''  OFF )
+
+    if [ -z $apps ]
+    then
+        apps_menu
+    else
+        pkg install -y $apps
+    fi
 }
 
-using_latest_repo
+drivers_list()
+{
+    apps=$(dialog --stdout --checklist 'Which drivers do you want to install?' 0 0 0 \
+    amdgpu '' OFF)
 
-CHOICE=0
+    if [ -z $apps ]
+    then
+        apps_menu
+    else
+        pkg install -y $apps
+    fi
+}
 
-while [ $CHOICE -ne 5 ]; do
 
-    CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "XFCE" 4 "Apps" 5 "Sair" 2>&1 > /dev/tty )
+menu()
+{
+    using_latest_repo
+    CHOICE=0
 
-    clear
-    case $CHOICE in
-        1)
-            gnome4
-            break
-            ;;
-        2)
-            kde_plasma
-            break
-            ;;
-        3)
-            xfce
-            break
-            ;;
-        4)
-            apps_list
-            break
-            ;;
-    esac
-done
+    while [ $CHOICE -ne 5 ]; do
+
+        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "XFCE" 4 "Apps" 5 "Quit" 2>&1 > /dev/tty )
+        
+        clear
+        case $CHOICE in
+            1)
+                gnome4
+                break
+                ;;
+            2)
+                kde_plasma
+                break
+                ;;
+            3)
+                xfce
+                break
+                ;;
+            4)
+                apps_menu
+                break
+                ;;        
+        esac
+    done
+}
+
+menu
