@@ -38,9 +38,7 @@ gnome4()
 {
     echo "Starting Gnome4 Installer"
     pkg_basic
-    pkg install -y gnome-42_2
-    pkg install -y gnome-desktop-42.2
-    pkg install -y gdm-42.0_2
+    pkg install -y gnome gnome-desktop gdm
     edit_rc
     edit_fstab
     sysrc 'gnome_enable="YES"'
@@ -51,8 +49,7 @@ kde_plasma()
 {
     echo "Starting KDE Plasma Installer"
     pkg_basic
-    pkg -y install x11/kde5  
-    pkg -y install x11/sddm
+    pkg -y install x11/kde5 x11/sddm
     edit_rc
     edit_fstab
     sysrc 'sddm_enable="YES"'
@@ -62,9 +59,9 @@ xfce()
 {
     echo "Starting XFCE Installer"
     pkg_basic
-    pkg install -y xfce 
-    pkg install -y lightdm 
-    pkg install -y lightdm-gtk-greeter 
+    pkg install -y xfce xfce4-goodies dbus lightdm lightdm-gtk-greeter 
+    edit_rc
+    edit_fstab
     sysrc 'lightdm_enable="YES"'
 }
 
