@@ -1,7 +1,11 @@
 #!/bin/sh
+# Developed by: Maurício Nunes               
+# https://github.com/mbnunes/freebsd_desktop 
+# Lisence: BSD v3
 
-using_latest_repo(){
-  # Essa função troca os repositorios trimestrais do pkg pelos mais recentes
+
+
+using_latest_repo(){  
   mkdir -p /usr/local/etc/pkg/repos &&
   echo 'FreeBSD: {
   url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest",
@@ -20,16 +24,18 @@ using_latest_repo(){
 
 pkg_basic()
 {
-    pkg update
     pkg upgrade -y
     pkg install -y xorg
 }
 
 edit_rc()
 {
+<<<<<<< HEAD
     # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
     sysrc 'linux_enable="YES"'
     sysrc 'linux_mounts_enable="NO"'
+=======
+>>>>>>> refs/remotes/origin/main
     sysrc 'moused_enable="YES"'
     sysrc 'dbus_enable="YES"'
     sysrc 'hald_enable="YES"'
@@ -39,19 +45,23 @@ edit_rc()
 
 edit_fstab()
 {
+<<<<<<< HEAD
     echo 'proc  /proc   procfs  rw  0   0'
     echo 'devfs /compat/linux/dev devfs rw,late 0 0'
     echo 'tmpfs /compat/linux/dev/shm tmpfs rw,late,size=1g,mode=1777 0 0'
     echo 'fdescfs /compat/linux/dev/fd fdescfs rw,late,linkrdlnk 0 0'
     echo 'linprocfs /compat/linux/proc linprocfs rw,late 0 0'
     echo 'linsysfs /compat/linux/sys linsysfs rw,late 0 0'
+=======
+    echo 'proc  /proc   procfs  rw  0   0' >> /etc/fstab
+>>>>>>> refs/remotes/origin/main
 }
 
 gnome4()
 {
     echo "Starting Gnome4 Installer"
     pkg_basic
-    pkg install -y gnome-42_2 gnome-desktop-42.2 gdm-42.0_2
+    pkg install -y gnome gnome-desktop gdm
     edit_rc
     edit_fstab
     sysrc 'gnome_enable="YES"'
@@ -62,7 +72,7 @@ kde_plasma()
 {
     echo "Starting Kde Plasma Installer"
     pkg_basic
-    pkg -y install x11/kde5 x11/sddm 
+    pkg -y install x11/kde5 x11/sddm
     edit_rc
     edit_fstab
     sysrc 'sddm_enable="YES"'
@@ -72,10 +82,13 @@ xfce()
 {
     echo "Starting Xfce Installer"
     pkg_basic
-    pkg install -y xfce lightdm lightdm-gtk-greeter 
+    pkg install -y xfce xfce4-goodies dbus lightdm lightdm-gtk-greeter 
+    edit_rc
+    edit_fstab
     sysrc 'lightdm_enable="YES"'
 }
 
+<<<<<<< HEAD
 mate()
 {
     echo "Starting Mate Installer"
@@ -93,16 +106,100 @@ window_maker()
 }
 
 cria_xinit()
+=======
+apps_menu()
+>>>>>>> refs/remotes/origin/main
 {
-    declare -a USER_DIR
-    USER_DIR=$(ls -d /home/*)
-    for usuario in $USER_DIR
-    do
-        TEMP_USER=$(sed "s/\/home\///g" $usuario)
-        echo $TEMP_USER
+    OPTION=0
+
+    while [ $OPTION -ne 5 ]; do
+
+        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Back" 2>&1 > /dev/tty )
+
+        clear
+        case $OPTION in
+            1)
+                apps_list
+                break
+                ;;
+            2)
+                drivers_list
+                break
+                ;;
+            *)
+                menu
+                break
+                ;;
+        esac
+    done
+    
+}
+
+apps_list()
+{
+    apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
+    firefox ''  OFF \
+    wifimgr ''  OFF \
+    thunderbird ''  OFF \
+    wine    ''  OFF \
+    wine-gecko  ''  OFF \
+    wine-mono   ''  OFF \
+    libreoffice ''  OFF )
+
+    if [ -z $apps ]
+    then
+        apps_menu
+    else
+        pkg install -y $apps
+    fi
+}
+
+drivers_list()
+{
+    apps=$(dialog --stdout --checklist 'Which drivers do you want to install?' 0 0 0 \
+    amdgpu '' OFF)
+
+    if [ -z $apps ]
+    then
+        apps_menu
+    else
+        pkg install -y $apps
+    fi
+}
+
+
+menu()
+{
+    using_latest_repo
+    CHOICE=0
+
+    while [ $CHOICE -ne 5 ]; do
+
+        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "XFCE" 4 "Apps" 5 "Quit" 2>&1 > /dev/tty )
+        
+        clear
+        case $CHOICE in
+            1)
+                gnome4
+                break
+                ;;
+            2)
+                kde_plasma
+                break
+                ;;
+            3)
+                xfce
+                break
+                ;;
+            4)
+                apps_menu
+                break
+                ;;        
+        esac
     done
 }
 
+<<<<<<< HEAD
 using_latest_repo
 
 CHOICE=0
@@ -130,3 +227,6 @@ while [ $CHOICE -ne 6 ]; do
             ;;
     esac
 done
+=======
+menu
+>>>>>>> refs/remotes/origin/main

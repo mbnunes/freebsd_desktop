@@ -5,6 +5,7 @@
 
 A simple script that uses dialogs to facilitate the installation of desktop environments for those with no initial knowledge of FreeBSD.
 
+- Using FreeBSD 13.1
 - Written in Shell Script
 - Simple
 - ✨Magic ✨
