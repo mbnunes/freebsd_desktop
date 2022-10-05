@@ -114,7 +114,7 @@ apps_menu()
 
     while [ $OPTION -ne 4 ]; do
 
-        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Back" 2>&1 > /dev/tty )
+        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Linuxulator" 4 "Back" 2>&1 > /dev/tty )
 
         clear
         case $OPTION in
@@ -124,6 +124,10 @@ apps_menu()
                 ;;
             2)
                 drivers_list
+                break
+                ;;
+            3)
+                init_linuxulator
                 break
                 ;;
             *)
@@ -159,7 +163,7 @@ apps_list()
     okular '' OFF \
     gnucash '' OFF \
     gnumeric '' OFF \
-    kmymoney-kde4 '' OFF \
+    kmymoney-kde4 '' OFF )
 
     if [ -z $apps ]
     then
@@ -199,33 +203,23 @@ menu()
         case $CHOICE in
             1)
                 gnome4
-                init_linuxulator
-                apps_list
                 break
                 ;;
             2)
                 kde_plasma
-                init_linuxulator
-                apps_list
                 break
                 ;;
             3)
                 xfce
-                init_linuxulator
-                apps_list
                 break
                 ;;
 
             4)  
                 mate
-                init_linuxulator
-                apps_list
                 break
                 ;;
             5)
                 gwindow_maker
-                init_linuxulator
-                apps_list
                 for acthome in /home/*/; do 
                   echo 'exec wmaker' >> $acthome/.xinitrc
                 done
