@@ -22,13 +22,6 @@ using_latest_repo(){
   pkg upgrade -y
 }
 
-create_xinit()
-{
-  for acthome in /home/*/; do
-    echo '' >> $acthome/.xinitrc
-  done
-}
-
 pkg_basic()
 {
     pkg install -y xorg
@@ -236,6 +229,7 @@ menu()
                 for acthome in /home/*/; do 
                   echo 'exec wmaker' >> $acthome/.xinitrc
                 done
+                echo 'exec wmaker' >> /root/.xinitrc
                 break
                 ;;
 
