@@ -127,7 +127,7 @@ apps_menu()
 {
     OPTION=0
 
-    while [ $OPTION -ne 5 ]; do
+    while [ $OPTION -ne 4 ]; do
 
         OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Back" 2>&1 > /dev/tty )
 
@@ -154,13 +154,13 @@ apps_list()
 {
     apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
     firefox ''  OFF \
+    firefox-esr '' OFF \
     wifimgr ''  OFF \
     thunderbird ''  OFF \
     wine    ''  OFF \
     wine-gecko  ''  OFF \
     wine-mono   ''  OFF \
     libreoffice ''  OFF \
-    firefox-esr '' OFF \
     konqueror '' OFF \
     chromium '' OFF \
     calligra '' OFF \
@@ -191,7 +191,7 @@ drivers_list()
     vmware '' OFF 
     )
 
-    if [ -z $apps ]
+    if [ -ne $apps ]
     then
         apps_menu
     else
