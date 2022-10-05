@@ -44,6 +44,8 @@ edit_fstab()
 }
 
 init_linuxulator(){
+    kldload linux
+    kldload linux64
     service linux start
     mkdir -p /compat/linux/dev/shm /compat/linux/dev/fd /compat/linux/proc /compat/linux/sys
     echo 'devfs      /compat/linux/dev      devfs      rw,late                    0  0' >> /etc/fstab
