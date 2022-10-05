@@ -44,8 +44,6 @@ edit_fstab()
 }
 
 init_linuxulator(){
-    kldload linux
-    kldload linux64
     service linux start
     mkdir -p /compat/linux/dev/shm /compat/linux/dev/fd /compat/linux/proc /compat/linux/sys
     echo 'devfs      /compat/linux/dev      devfs      rw,late                    0  0' >> /etc/fstab
@@ -56,7 +54,6 @@ init_linuxulator(){
     mount -al
     sysrc 'linux_enable="YES"'
     sysrc 'linux_mounts_enable="NO"'
-    pkg install -y linux-c7 util-linux
 }
 
 gnome4()
@@ -199,7 +196,7 @@ menu()
                 ;;
         esac
     done
-    init_linuxulator
 }
 
 menu
+init_linuxulator
