@@ -212,7 +212,9 @@ menu()
                 gwindow_maker
                 init_linuxulator
                 apps_list
-                echo 'exec wmaker' >> /home/*/.xinitrc
+                for acthome in /home/*/; do 
+                  echo 'exec wmaker' >> $acthome/.xinitrc
+                done
                 break
                 ;;
             6)
