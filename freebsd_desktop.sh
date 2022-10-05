@@ -85,6 +85,8 @@ mate()
     echo "Starting Mate Installer"
     pkg_basic
     pkg install -y mate-desktop mate lightdm-gtk-greeter
+    edit_rc
+    edit_fstab
     sysrc 'lightdm_enable="YES"'
 }
 
@@ -92,7 +94,9 @@ window_maker()
 {
     echo "Starting WindowMaker Installer"
     pkg_basic
-    pkg install -y windowmaker gnustep gnome-theme-extra lightdm lightdm-gtk-greeter
+    pkg install -y windowmaker gnustep gnome-themes-extra lightdm lightdm-gtk-greeter
+    edit_rc
+    edit_fstab
     sysrc 'lightdm_enable="YES"'
 }
 
