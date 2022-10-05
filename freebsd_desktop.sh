@@ -44,8 +44,6 @@ edit_fstab()
 }
 
 init_linuxulator(){
-    kldload linux
-    kldload linux64
     mkdir -p /compat/linux/dev/shm /compat/linux/dev/fd /compat/linux/proc /compat/linux/sys
     echo 'devfs      /compat/linux/dev      devfs      rw,late                    0  0' >> /etc/fstab
     echo 'tmpfs      /compat/linux/dev/shm  tmpfs      rw,late,size=1g,mode=1777  0  0' >> /etc/fstab
@@ -54,8 +52,8 @@ init_linuxulator(){
     echo 'linsysfs   /compat/linux/sys      linsysfs   rw,late                    0  0' >> /etc/fstab
     mount -al
     service linux onestart
-    sysrc 'linux_enable="YES"'
-    sysrc 'linux_mounts_enable="NO"'
+    sysrc linux_enable="YES"
+    sysrc linux_mounts_enable="NO"
 }
 
 gnome4()
@@ -86,7 +84,7 @@ xfce()
     pkg install -y xfce xfce4-goodies dbus lightdm lightdm-gtk-greeter 
     edit_rc
     edit_fstab
-    sysrc 'lightdm_enable="YES"'
+    sysrc lightdm_enable="YES"
 }
 
 mate()
@@ -95,7 +93,7 @@ mate()
     pkg install -y mate-desktop mate lightdm-gtk-greeter
     edit_rc
     edit_fstab
-    sysrc 'lightdm_enable="YES"'
+    sysrc lightdm_enable="YES"
 }
 
 cria_xinit()
@@ -168,7 +166,7 @@ menu()
 
     CHOICE=0
 
-    while [ $CHOICE -ne 7]; do
+    while [ $CHOICE -ne 6]; do
 
         CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "Xfce" 4 "Mate" 5 "Apps" 6 "Quit" 2>&1 > /dev/tty )
         
@@ -198,8 +196,7 @@ menu()
                 ;;
         esac
     done
+    init_linuxulator
 }
 
-menu &&
-init_linuxulator &&
-clear
+menu
