@@ -92,8 +92,8 @@ window_maker()
 {
     echo "Starting WindowMaker Installer"
     pkg_basic
-    pkg install -y windowmaker gnustep slim slim_themes
-    sysrc 'slim_enable="YES"'
+    pkg install -y windowmaker gnustep gnome-theme-extra lightdm lightdm-gtk-greeter
+    sysrc 'lightdm_enable="YES"'
 }
 
 cria_xinit()
