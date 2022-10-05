@@ -162,7 +162,6 @@ drivers_list()
 
 menu()
 {
-    using_latest_repo
     CHOICE=0
 
     while [ $CHOICE -ne 6]; do
@@ -201,5 +200,5 @@ menu()
     done
 }
 
-menu;
-clear 
+using_latest_repo    
+menu
