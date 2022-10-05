@@ -102,10 +102,9 @@ gwindow_maker()
 {
   echo "Starting Window Maker Installer"
   pkg_basic
-  pkg install -y windowmaker gnustep gnome-themes-extra slim slim-themes
+  pkg install -y windowmaker gnustep gnome-themes-extra   
   edit_rc
   edit_fstab
-  sysrc slim_enable="YES"
 }
 
 
