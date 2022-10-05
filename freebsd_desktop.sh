@@ -102,7 +102,7 @@ gwindow_maker()
 {
   echo "Starting Window Maker Installer"
   pkg_basic
-  pkg install -y windowmaker gnustep gnome-themes-extra slim slim_themes
+  pkg install -y windowmaker gnustep gnome-themes-extra slim slim-themes
   edit_rc
   edit_fstab
   sysrc slim_enable="YES"
@@ -145,7 +145,8 @@ apps_list()
     wine    ''  OFF \
     wine-gecko  ''  OFF \
     wine-mono   ''  OFF \
-    libreoffice ''  OFF )
+    libreoffice ''  OFF \
+    portal '' OFF)
 
     if [ -z $apps ]
     then
