@@ -42,11 +42,18 @@ edit_rc()
 edit_fstab()
 {
     echo 'proc  /proc   procfs  rw  0   0' >> /etc/fstab
-    echo 'devfs /compat/linux/dev devfs rw,late 0 0' >> /etc/fstab
-    echo 'tmpfs /compat/linux/dev/shm tmpfs rw,late,size=1g,mode=1777 0 0' >> /etc/fstab
-    echo 'fdescfs /compat/linux/dev/fd fdescfs rw,late,linkrdlnk 0 0' >> /etc/fstab
-    echo 'linprocfs /compat/linux/proc linprocfs rw,late 0 0' >> /etc/fstab 
-    echo 'linsysfs /compat/linux/sys linsysfs rw,late 0 0' >> /etc/fstab
+    
+}
+
+init_linuxulator(){
+    service linux start
+    echo 'devfs      /compat/linux/dev      devfs      rw,late                    0  0' >> /etc/fstab
+    echo 'tmpfs      /compat/linux/dev/shm  tmpfs      rw,late,size=1g,mode=1777  0  0' >> /etc/fstab
+    echo 'fdescfs    /compat/linux/dev/fd   fdescfs    rw,late,linrdlnk           0  0' >> /etc/fstab
+    echo 'linprocfs  /compat/linux/proc     linprocfs  rw,late                    0  0' >> /etc/fstab 
+    echo 'linsysfs   /compat/linux/sys      linsysfs   rw,late                    0  0' >> /etc/fstab
+    mount -al
+    pkg install -y linux-c7 util-linux
 }
 
 gnome4()
@@ -167,6 +174,7 @@ drivers_list()
 menu()
 {
     using_latest_repo
+    init_linuxulator
     CHOICE=0
 
     while [ $CHOICE -ne 7 ]; do
