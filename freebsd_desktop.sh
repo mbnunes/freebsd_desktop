@@ -185,21 +185,18 @@ menu()
         case $CHOICE in
             1)
                 gnome4
-                cria_xinit
                 init_linuxulator
                 apps_list
                 break
                 ;;
             2)
                 kde_plasma
-                cria_xinit
                 init_linuxulator
                 apps_list
                 break
                 ;;
             3)
                 xfce
-                cria_xinit
                 init_linuxulator
                 apps_list
                 break
@@ -207,14 +204,12 @@ menu()
 
             4)  
                 mate
-                cria_xinit
                 init_linuxulator
                 apps_list
                 break
                 ;;
             5)
                 gwindow_maker
-                cria_xinit
                 init_linuxulator
                 apps_list
                 echo 'exec wmaker' >> /home/*/.xinitrc
