@@ -12,9 +12,11 @@ A simple script that uses dialogs to facilitate the installation of desktop envi
 
 ## Features
 
-- KDE Plasma
+- Kde Plasma
 - Gnome 42
-- XFCE
+- Xfce
+- Mate
+- Window Maker
 
 For now, there are only these 3 Desktop Environments options, I hope to add others according to demand and time.
 Soon I will also put a menu of starter applications that you want to come with the installation.
