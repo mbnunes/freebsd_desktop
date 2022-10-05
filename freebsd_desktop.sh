@@ -198,5 +198,5 @@ menu()
 }
 
 menu;
-clear && 
-init_linuxulator
+clear 
+#init_linuxulator
