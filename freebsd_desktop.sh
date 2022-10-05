@@ -147,18 +147,18 @@ apps_list()
     apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
     firefox ''  OFF \
     firefox-esr '' OFF \
+    konqueror '' OFF \
+    chromium '' OFF \
     wifimgr ''  OFF \
     thunderbird ''  OFF \
     wine    ''  OFF \
     wine-gecko  ''  OFF \
     wine-mono   ''  OFF \
     libreoffice ''  OFF \
-    konqueror '' OFF \
-    chromium '' OFF \
+    apache-openoffice '' OFF \
     calligra '' OFF \
     abiword '' OFF \
     gimp '' OFF \
-    apache-openoffice '' OFF \
     xpdf '' OFF \
     gv '' OFF \
     qeeqie '' OFF \
@@ -167,7 +167,6 @@ apps_list()
     gnucash '' OFF \
     gnumeric '' OFF \
     kmymoney-kde4 '' OFF \
-    portal '' OFF )
 
     if [ -z $apps ]
     then
