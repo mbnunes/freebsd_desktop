@@ -62,6 +62,7 @@ init_linuxulator(){
 gnome4()
 {
     echo "Starting Gnome4 Installer"
+    pkg_basic
     pkg install -y gnome gnome-desktop gdm
     edit_rc
     edit_fstab
@@ -72,6 +73,7 @@ gnome4()
 kde_plasma()
 {
     echo "Starting Kde Plasma Installer"
+    pkg_basic
     pkg -y install x11/kde5 x11/sddm
     edit_rc
     edit_fstab
@@ -81,6 +83,7 @@ kde_plasma()
 xfce()
 {
     echo "Starting Xfce Installer"
+    pkg_basic
     pkg install -y xfce xfce4-goodies dbus lightdm lightdm-gtk-greeter 
     edit_rc
     edit_fstab
@@ -91,15 +94,6 @@ mate()
 {
     echo "Starting Mate Installer"
     pkg install -y mate-desktop mate lightdm-gtk-greeter
-    edit_rc
-    edit_fstab
-    sysrc 'lightdm_enable="YES"'
-}
-
-window_maker()
-{
-    echo "Starting WindowMaker Installer"
-    pkg install -y windowmaker gnustep gnome-themes-extra lightdm lightdm-gtk-greeter
     edit_rc
     edit_fstab
     sysrc 'lightdm_enable="YES"'
@@ -172,13 +166,12 @@ drivers_list()
 menu()
 {
     using_latest_repo
-    pkg_basic
     init_linuxulator
     CHOICE=0
 
-    while [ $CHOICE -ne 7 ]; do
+    while [ $CHOICE -ne 6] do
 
-        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "Xfce" 4 "Mate" 5 "Window Maker" 6 "Apps" 7 "Quit" 2>&1 > /dev/tty )
+        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "KDE Plasma" 3 "Xfce" 4 "Mate" 5 "Apps" 6 "Quit" 2>&1 > /dev/tty )
         
         clear
         case $CHOICE in
@@ -200,11 +193,7 @@ menu()
                 break
                 ;;
 
-            5)  
-                window_maker
-                break
-                ;;
-            6)
+            5)
                 apps_menu
                 break
                 ;;
