@@ -30,6 +30,7 @@ pkg_basic()
 edit_rc()
 {
     # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
+    sysrc webcamd_enable="YES"
     sysrc moused_enable="YES"
     sysrc dbus_enable="YES"
     sysrc hald_enable="YES"
