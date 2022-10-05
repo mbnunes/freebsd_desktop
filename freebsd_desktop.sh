@@ -40,7 +40,7 @@ edit_rc()
 edit_fstab()
 {
     echo 'proc  /proc   procfs  rw  0   0' >> /etc/fstab
-    
+    mount -al
 }
 
 init_linuxulator(){
@@ -90,6 +90,7 @@ xfce()
 mate()
 {
     echo "Starting Mate Installer"
+    pkg_basic
     pkg install -y mate-desktop mate lightdm-gtk-greeter
     edit_rc
     edit_fstab
