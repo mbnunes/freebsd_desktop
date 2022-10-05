@@ -32,6 +32,7 @@ create_xinit()
 pkg_basic()
 {
     pkg install -y xorg
+    pkg update
 }
 
 edit_rc()
@@ -175,7 +176,7 @@ apps_list()
     gnucash '' OFF \
     gnumeric '' OFF \
     kmymoney-kde4 '' OFF\
-    portal '' OFF)
+    portal '' OFF )
 
     if [ -z $apps ]
     then
