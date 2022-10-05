@@ -98,7 +98,7 @@ mate()
     sysrc lightdm_enable="YES"
 }
 
-window_maker()
+gwindow_maker()
 {
   echo "Starting Window Maker Installer"
   pkg_basic
@@ -204,7 +204,7 @@ menu()
                 break
                 ;;
             5)
-                window_maker
+                gwindow_maker
                 init_linuxulator
                 break
                 ;;
