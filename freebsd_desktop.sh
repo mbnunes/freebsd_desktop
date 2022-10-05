@@ -210,7 +210,7 @@ menu()
                 break
                 ;;
             6)
-                apps_menu
+                apps_list
                 break
                 ;;
         esac
