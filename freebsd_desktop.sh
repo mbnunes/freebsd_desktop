@@ -30,11 +30,11 @@ pkg_basic()
 edit_rc()
 {
     # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
-    sysrc 'moused_enable="YES"'
-    sysrc 'dbus_enable="YES"'
-    sysrc 'hald_enable="YES"'
-    sysrc 'sound_load="YES"'
-    sysrc 'snd_hda_load="YES"'
+    sysrc moused_enable="YES"
+    sysrc dbus_enable="YES"
+    sysrc hald_enable="YES"
+    sysrc sound_load="YES"
+    sysrc snd_hda_load="YES"
 }
 
 edit_fstab()
@@ -166,7 +166,6 @@ drivers_list()
 menu()
 {
     using_latest_repo
-    init_linuxulator
 
     CHOICE=0
 
@@ -199,6 +198,7 @@ menu()
                 break
                 ;;
         esac
+        init_linuxulator
     done
 }
 
