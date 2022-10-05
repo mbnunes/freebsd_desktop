@@ -178,7 +178,7 @@ menu()
 
     while [ $CHOICE -ne 7 ]; do
 
-        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 7 "Window Maker" 6 "Apps" 7 "Quit" 2>&1 > /dev/tty)
+        CHOICE=$(dialog --backtitle "Desktop Enviroment Installer" --title "Select Enviroments" --menu "This is a script to make life easier for the novice user who wants to test FreeBSD as a Desktop" 15 40 20 1 "Gnome" 2 "Kde Plasma" 3 "Xfce" 4 "Mate" 5 "Window Maker" 6 "Apps" 7 "Quit" 2>&1 > /dev/tty)
         
         clear
         case $CHOICE in
