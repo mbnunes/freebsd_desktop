@@ -22,6 +22,13 @@ using_latest_repo(){
   pkg upgrade -y
 }
 
+create_xinit()
+{
+  for acthome in /home/*/; do
+    echo '' >> $acthome/.xinitrc
+  done
+}
+
 pkg_basic()
 {
     pkg install -y xorg
@@ -153,6 +160,21 @@ apps_list()
     wine-gecko  ''  OFF \
     wine-mono   ''  OFF \
     libreoffice ''  OFF \
+    firefox-esr '' OFF \
+    konqueror '' OFF \
+    chromium '' OFF \
+    calligra '' OFF \
+    abiword '' OFF \
+    gimp '' OFF \
+    apache-openoffice ''\
+    xpdf '' OFF \
+    gv '' OFF \
+    qeeqie '' OFF \
+    epdfview '' OFF \
+    okular '' OFF \
+    gnucash '' OFF \
+    gnumeric '' OFF \
+    kmymoney-kde4 '' OFF\
     portal '' OFF)
 
     if [ -z $apps ]
@@ -166,8 +188,6 @@ apps_list()
 drivers_list()
 {
     apps=$(dialog --stdout --checklist 'Which drivers do you want to install?' 0 0 0 \
-    intelgpu '' OFF \
-    amdgpu '' OFF \
     vmware '' OFF 
     )
 
