@@ -173,19 +173,23 @@ menu()
         case $CHOICE in
             1)
                 gnome4
+                init_linuxulator
                 break
                 ;;
             2)
                 kde_plasma
+                init_linuxulator
                 break
                 ;;
             3)
                 xfce
+                init_linuxulator
                 break
                 ;;
 
             4)  
                 mate
+                init_linuxulator
                 break
                 ;;
 
@@ -199,4 +203,3 @@ menu()
 
 menu;
 clear 
-#init_linuxulator
