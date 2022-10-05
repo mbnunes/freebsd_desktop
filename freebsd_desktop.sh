@@ -30,8 +30,6 @@ pkg_basic()
 edit_rc()
 {
     # a função sysrc é mais indicada para trabalhar com o /etc/rc.conf
-    sysrc 'linux_enable="YES"'
-    sysrc 'linux_mounts_enable="NO"'
     sysrc 'moused_enable="YES"'
     sysrc 'dbus_enable="YES"'
     sysrc 'hald_enable="YES"'
@@ -46,20 +44,24 @@ edit_fstab()
 }
 
 init_linuxulator(){
+    kldload linux
+    kldload linux64
     service linux start
+    mkdir -p /compat/linux/dev/shm /compat/linux/dev/fd /compat/linux/proc /compat/linux/sys
     echo 'devfs      /compat/linux/dev      devfs      rw,late                    0  0' >> /etc/fstab
     echo 'tmpfs      /compat/linux/dev/shm  tmpfs      rw,late,size=1g,mode=1777  0  0' >> /etc/fstab
     echo 'fdescfs    /compat/linux/dev/fd   fdescfs    rw,late,linrdlnk           0  0' >> /etc/fstab
     echo 'linprocfs  /compat/linux/proc     linprocfs  rw,late                    0  0' >> /etc/fstab 
     echo 'linsysfs   /compat/linux/sys      linsysfs   rw,late                    0  0' >> /etc/fstab
     mount -al
+    sysrc 'linux_enable="YES"'
+    sysrc 'linux_mounts_enable="NO"'
     pkg install -y linux-c7 util-linux
 }
 
 gnome4()
 {
     echo "Starting Gnome4 Installer"
-    pkg_basic
     pkg install -y gnome gnome-desktop gdm
     edit_rc
     edit_fstab
@@ -70,7 +72,6 @@ gnome4()
 kde_plasma()
 {
     echo "Starting Kde Plasma Installer"
-    pkg_basic
     pkg -y install x11/kde5 x11/sddm
     edit_rc
     edit_fstab
@@ -80,7 +81,6 @@ kde_plasma()
 xfce()
 {
     echo "Starting Xfce Installer"
-    pkg_basic
     pkg install -y xfce xfce4-goodies dbus lightdm lightdm-gtk-greeter 
     edit_rc
     edit_fstab
@@ -90,7 +90,6 @@ xfce()
 mate()
 {
     echo "Starting Mate Installer"
-    pkg_basic
     pkg install -y mate-desktop mate lightdm-gtk-greeter
     edit_rc
     edit_fstab
@@ -100,7 +99,6 @@ mate()
 window_maker()
 {
     echo "Starting WindowMaker Installer"
-    pkg_basic
     pkg install -y windowmaker gnustep gnome-themes-extra lightdm lightdm-gtk-greeter
     edit_rc
     edit_fstab
@@ -174,6 +172,7 @@ drivers_list()
 menu()
 {
     using_latest_repo
+    pkg_basic
     init_linuxulator
     CHOICE=0
 
