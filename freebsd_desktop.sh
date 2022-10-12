@@ -142,7 +142,6 @@ apps_menu()
 apps_list()
 {
     apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
-    firefox ''  OFF \
     firefox-esr '' OFF \
     konqueror '' OFF \
     chromium '' OFF \
