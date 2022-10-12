@@ -114,7 +114,7 @@ apps_menu()
 
     while [ $OPTION -ne 4 ]; do
 
-        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Linuxulator" 4 "Back" 2>&1 > /dev/tty )
+        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Linuxulator" 4 "Back" 5 "Desktop Enviroment" 2>&1 > /dev/tty )
 
         clear
         case $OPTION in
@@ -228,4 +228,4 @@ menu()
 }
 
 using_latest_repo    
-menu
+apps_menu
