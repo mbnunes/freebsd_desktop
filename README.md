@@ -30,8 +30,9 @@ For production environments...
 ```sh
 pkg update -y
 pkg install git -y
-chmod +x freebsd_desktop.sh
-./freebsd_desktop.sh
+git clone https://github.com/mbnunes/freebsd_desktop.git
+cd freebsd_desktop
+sh freebsd_desktop.sh
 ```
 
 ## License
