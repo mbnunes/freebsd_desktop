@@ -73,7 +73,7 @@ kde_plasma()
 {
     echo "Starting Kde Plasma Installer"
     pkg_basic
-    pkg -y install x11/kde5 x11/sddm
+    pkg install -y x11/kde5 x11/sddm
     edit_rc
     edit_fstab
     sysrc 'sddm_enable="YES"'
