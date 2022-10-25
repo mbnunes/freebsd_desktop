@@ -146,6 +146,7 @@ apps_list()
 {
     apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
     firefox-esr '' OFF \
+    chromium '' OFF \
     libreoffice '' OFF \
     kdenlive '' OFF \
     obs-studio '' OFF \
