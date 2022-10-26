@@ -1,8 +1,0 @@
-A simple script that uses dialogs to facilitate the installation of desktop env.
-## Features
-- Kde Plasma
-- Gnome 42
-- Xfce
-- Mate
-- Window Maker
-For now, there are only these 5 Desktop Environments options.
