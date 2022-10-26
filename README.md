@@ -12,14 +12,25 @@ A simple script that uses dialogs to facilitate the installation of desktop envi
 
 ## Features
 
-- Kde Plasma
-- Gnome 42
-- Xfce
-- Mate
-- Window Maker
+### Desktop Enviroments
+  - Kde Plasma
+  - Gnome 42
+  - Xfce
+  - Mate
+  - Window Maker
 
 For now, there are only these 5 Desktop Environments options, I hope to add others according to demand and time.
 Soon I will also put a menu of starter applications that you want to come with the installation.
+
+### Support to initialize linuxulator
+
+### Support to pre-select utilities to you FreeBSD
+
+**Warning**: probably someone applications can't run in Window Maker
+
+### Support to pre-select list of drivers
+
+[Linuxulator](https://docs.freebsd.org/en/books/handbook/linuxemu/) is a abi (binary application interface) to run unmodified Linux binaries under FreeBSD 
 
 ## Installation
 

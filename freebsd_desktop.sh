@@ -114,24 +114,27 @@ apps_menu()
 
     while [ $OPTION -ne 4 ]; do
 
-        OPTION=$(dialog --backtitle "Desktop Enviroment Installer" --title "Apps" --menu "what would you like to install?" 15 40 20 1 "Apps" 2 "Drivers" 3 "Linuxulator" 4 "Back" 2>&1 > /dev/tty )
+        OPTION=$(dialog --backtitle "FreeBSD Desktop Installer" --title "Options" --menu "what would you like to install?" 15 40 20 1 "Desktop Enviroment" 2 "Apps" 3 "Drivers" 4 "Linuxulator" 5 "Quit" 2>&1 > /dev/tty )
 
         clear
         case $OPTION in
             1)
-                apps_list
+                menu
                 break
                 ;;
             2)
-                drivers_list
+                apps_list
                 break
                 ;;
             3)
+                drivers_list
+                break
+                ;;
+            4)
                 init_linuxulator
                 break
                 ;;
             *)
-                menu
                 break
                 ;;
         esac
@@ -142,28 +145,21 @@ apps_menu()
 apps_list()
 {
     apps=$(dialog --stdout --checklist 'Which apps do you want to install?' 0 0 0 \
-    firefox ''  OFF \
     firefox-esr '' OFF \
-    konqueror '' OFF \
     chromium '' OFF \
-    wifimgr ''  OFF \
-    thunderbird ''  OFF \
-    wine    ''  OFF \
-    wine-gecko  ''  OFF \
-    wine-mono   ''  OFF \
-    libreoffice ''  OFF \
-    apache-openoffice '' OFF \
-    calligra '' OFF \
-    abiword '' OFF \
+    libreoffice '' OFF \
+    kdenlive '' OFF \
+    obs-studio '' OFF \
+    inkscape '' OFF \
+    vscode '' OFF \
+    cawbird '' OFF \
+    simplescreenrecorder '' OFF \
+    thunderbird '' OFF \
+    wifimgr '' OFF \
+    winetricks '' OFF \
     gimp '' OFF \
-    xpdf '' OFF \
-    gv '' OFF \
-    qeeqie '' OFF \
-    epdfview '' OFF \
-    okular '' OFF \
-    gnucash '' OFF \
-    gnumeric '' OFF \
-    kmymoney-kde4 '' OFF )
+    epdfview '' OFF
+     )
 
     if [ -z $apps ]
     then
@@ -179,7 +175,13 @@ drivers_list()
     xf86-video-intel '' OFF \
     xf86-video-amdgpu '' OFF \
     xf86-video-vesa '' OFF \
-    xf86-video-vmware '' OFF
+    xf86-video-vmware '' OFF \
+    drm-510-kmod '' OFF \
+    vulkan-loader '' OFF \
+    intel-em-kmod '' OFF \
+    intel-ix-kmod '' OFF \
+    intel-ixl-kmod '' OFF \
+    realtek-re-kmod '' OFF \
     )
 
     if [ -ne $apps ]
@@ -236,4 +238,4 @@ menu()
 }
 
 using_latest_repo    
-menu
+apps_menu
