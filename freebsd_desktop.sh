@@ -103,7 +103,7 @@ gwindow_maker()
 {
   echo "Starting Window Maker Installer"
   pkg_basic
-  pkg install -y windowmaker gnustep gnome-themes-extra   
+  pkg install -y windowmaker gnustep gnome-themes-extra mixer.app wmpinboard wmnet wmcpuload wmtime   
   edit_rc
   edit_fstab
 }
