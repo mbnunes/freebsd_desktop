@@ -125,7 +125,8 @@ lumina()
 
 check_user_i3()
 {
-    if [[ $1 == $2  ]]; then
+    if [ $1 == $2  ]
+    then
         echo "/usr/local/bin/i3" >> /usr/home/$1/.xinitrc
         chown $1 /usr/home/$1/.xinitrc
     else
