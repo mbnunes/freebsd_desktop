@@ -123,6 +123,33 @@ lumina()
     dbus-uuidgen --ensure
 }
 
+check_user_i3()
+{
+    if [[ $1 == $2  ]]; then
+        echo "/usr/local/bin/i3" >> /usr/home/$1/.xinitrc
+        chown $1 /usr/home/$1/.xinitrc
+    else
+        echo "User does not exist, try again"
+        echo "Which user would you like to install the i3?"
+        read user_i3
+
+        check_user_i3 $user_i3 $(id $user_i3)
+    fi
+}
+
+i3()
+{
+    echo "Starting i3 Installer"
+    pkg_basic
+    pkg install -y i3 i3lock i3status
+    pkg install dmenu
+
+    echo "Which user would you like to install the i3?"
+    read user_i3
+
+    check_user_i3 $user_i3 $(id $user_i3)
+}
+
 apps_menu()
 {
     OPTION=0
@@ -249,6 +276,10 @@ menu()
                 ;;
             6)
                 lumina
+                break
+                ;;
+            7)  
+                i3
                 break
                 ;;
         esac
