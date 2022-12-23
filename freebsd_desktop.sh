@@ -115,7 +115,6 @@ lumina()
     sysrc mixer_enable="YES"
     pkg install -y lumina
     dbus-uuidgen --ensure
-    start-lumina-desktop 
 }
 
 apps_menu()
