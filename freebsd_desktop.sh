@@ -145,10 +145,10 @@ i3()
     pkg install -y i3 i3lock i3status
     pkg install dmenu
 
-    echo "Which user would you like to install the i3?"
-    read user_i3
+    # echo "Which user would you like to install the i3?"
+    # read user_i3
 
-    check_user_i3 $user_i3 $(id $user_i3)
+    # check_user_i3 $user_i3 $(id $user_i3)
 }
 
 apps_menu()
