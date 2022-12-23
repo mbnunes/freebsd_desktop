@@ -39,6 +39,12 @@ edit_rc()
     sysrc snd_hda_load="YES"
 }
 
+vbox_rc()
+{
+    vboxguest_enable="YES"
+    vboxservice_enable="YES"
+}
+
 edit_fstab()
 {
     echo 'proc  /proc   procfs  rw  0   0' >> /etc/fstab
@@ -167,14 +173,18 @@ apps_list()
     wifimgr '' OFF \
     winetricks '' OFF \
     gimp '' OFF \
-    epdfview '' OFF
-     )
+    epdfview '' OFF \
+    virtualbox-ose-additions '' OFF
+    )
 
     if [ -z $apps ]
     then
         apps_menu
     else
         pkg install -y $apps
+        if [[ $apps == *"virtualbox-ose-additions"* ]]; then
+            vbox_rc
+        fi
     fi
 }
 
@@ -197,7 +207,7 @@ drivers_list()
     then
         apps_menu
     else
-        pkg install -y $apps
+        pkg install -y $apps        
     fi
 }
 
